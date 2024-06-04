@@ -32,14 +32,14 @@ function getText() {
     [es_makeFolder@message]="Creando carpeta _disabled en $optResolveLibs"
     [en_makeFolder@message]="Creating _disabled folder in $disabledFolder"
 
-    [es_makeFolder@success]="Carpeta _disabled creada correctamente en $optResolveLibs."
-    [en_makeFolder@success]="_disabled folder created successfully in $optResolveLibs."
+    [es_makeFolder@success]="Carpeta _disabled creada correctamente en $optResolveLibs"
+    [en_makeFolder@success]="_disabled folder created successfully in $optResolveLibs"
 
-    [es_moveFiles@message]="Moviendo bibliotecas a $optResolveLibs"
+    [es_moveFiles@message]="Moviendo bibliotecas a $disabledFolder"
     [en_moveFiles@message]="Moving libraries to $disabledFolder"
 
-    [es_moveFiles@success]="Bibliotecas movidas correctamente a $disabledFolder."
-    [en_moveFiles@success]="Libraries moved successfully to $disabledFolder."
+    [es_moveFiles@success]="Bibliotecas movidas correctamente a $disabledFolder"
+    [en_moveFiles@success]="Libraries moved successfully to $disabledFolder"
 
     [es_makeFolder@error]="Error al crear la carpeta _disabled en $optResolveLibs"
     [en_makeFolder@error]="Error creating _disabled folder in $disabledFolder"
@@ -50,14 +50,14 @@ function getText() {
     [es_moveFiles@mvError]="Error al mover las bibliotecas a $disabledFolder"
     [en_moveFiles@mvError]="Error moving libraries to $disabledFolder"
 
-    [es_main@libsError]="Error: $optResolveLibs no existe."
-    [en_main@libsError]="Error: $optResolveLibs does not exist."
+    [es_main@libsError]="Error: $optResolveLibs no existe"
+    [en_main@libsError]="Error: $optResolveLibs does not exist"
 
-    [es_main@success]="Proceso completado correctamente."
-    [en_main@success]="Process completed successfully."
+    [es_main@success]="Proceso completado correctamente"
+    [en_main@success]="Process completed successfully"
 
-    [es_main@mvError]="Error: Error al mover las bibliotecas a $disabledFolder."
-    [en_main@mvError]="Error: Failed to move libraries to $disabledFolder."
+    [es_main@mvError]="Error: Error al mover las bibliotecas a $disabledFolder"
+    [en_main@mvError]="Error: Failed to move libraries to $disabledFolder"
 
     [es_main@error]="Error: Error al crear $disabledFolder"
     [en_main@error]="Error: Failed to create $disabledFolder"
