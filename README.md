@@ -1,6 +1,6 @@
 # resolve-lib-fix
 
-![Alt text](.ignore/davinciresolve.png)
+![Alt text](.gitignore/davinciresolve.png)
 
 Quick correction about DaVinci Resolve & DaVinci Resolve Studio related to libraries.
 
