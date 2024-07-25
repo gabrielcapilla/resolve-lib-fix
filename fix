@@ -1,0 +1,105 @@
+#!/bin/bash
+
+readonly optResolveLibs="/opt/resolve/libs/"
+readonly disabledFolder="${optResolveLibs}_disabled"
+
+declare -A print=(
+  [es_makeFolder@message]="Creando carpeta _disabled en $optResolveLibs"
+  [en_makeFolder@message]="Creating _disabled folder in $disabledFolder"
+
+  [es_makeFolder@success]="Carpeta _disabled creada correctamente en $optResolveLibs"
+  [en_makeFolder@success]="_disabled folder created successfully in $optResolveLibs"
+
+  [es_moveFiles@message]="Moviendo bibliotecas a $disabledFolder"
+  [en_moveFiles@message]="Moving libraries to $disabledFolder"
+
+  [es_moveFiles@success]="Bibliotecas movidas correctamente a $disabledFolder"
+  [en_moveFiles@success]="Libraries moved successfully to $disabledFolder"
+
+  [es_makeFolder@error]="Error al crear la carpeta _disabled en $optResolveLibs"
+  [en_makeFolder@error]="Error creating _disabled folder in $disabledFolder"
+
+  [es_moveFiles@cdError]="Error al cambiar al directorio $optResolveLibs"
+  [en_moveFiles@cdError]="Error changing to directory $optResolveLibs"
+
+  [es_moveFiles@mvError]="Error al mover las bibliotecas a $disabledFolder"
+  [en_moveFiles@mvError]="Error moving libraries to $disabledFolder"
+
+  [es_main@libsError]="Error: $optResolveLibs no existe"
+  [en_main@libsError]="Error: $optResolveLibs does not exist"
+
+  [es_main@success]="Proceso completado correctamente"
+  [en_main@success]="Process completed successfully"
+
+  [es_main@mvError]="Error: Error al mover las bibliotecas a $disabledFolder"
+  [en_main@mvError]="Error: Failed to move libraries to $disabledFolder"
+
+  [es_main@error]="Error: Error al crear $disabledFolder"
+  [en_main@error]="Error: Failed to create $disabledFolder"
+)
+
+function lang() {
+  local lang=${LANG:0:2}
+  local available=("es" "en")
+
+  if [[ " ${available[*]} " == *"$lang"* ]]; then
+    printf "%s" "$lang"
+  else
+    printf "%s" "en"
+  fi
+}
+
+function print() {
+  local action=$1
+  local lang
+  lang=$(lang)
+  local key="${lang}_${action}"
+  printf "%s" "${print[$key]}"
+}
+
+function makeFolder() {
+  printf "%s\n" "$(print makeFolder@message)"
+
+  if sudo mkdir -p "$disabledFolder"; then
+    printf "%s\n" "$(print makeFolder@success)"
+    return 0
+  else
+    printf "%s\n" "$(print makeFolder@error)" >&2
+    return 1
+  fi
+}
+
+function moveFiles() {
+  printf "%s\n" "$(print moveFiles@message)"
+
+  if cd "$optResolveLibs" && sudo mv libgio* libglib* libgmodule* libgobject* "$disabledFolder"; then
+    printf "%s\n" "$(print moveFiles@success)"
+    return 0
+  else
+    printf "%s\n" "$(print moveFiles@cdError)" >&2
+    printf "%s\n" "$(print moveFiles@mvError)" >&2
+    return 1
+  fi
+}
+
+function main() {
+  if [ ! -d "$optResolveLibs" ]; then
+    printf "%s\n" "$(print main@libsError)" >&2
+    exit 1
+  fi
+
+  if makeFolder; then
+    if moveFiles; then
+      printf "%s\n" "$(print main@success)"
+      exit 0
+    else
+      printf "%s\n" "$(print main@mvError)" >&2
+      exit 1
+    fi
+  else
+    printf "%s\n" "$(print main@error)" >&2
+    exit 1
+  fi
+}
+
+main
