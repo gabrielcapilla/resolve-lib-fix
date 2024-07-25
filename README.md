@@ -7,7 +7,7 @@ Quick correction about DaVinci Resolve & DaVinci Resolve Studio related to libra
 ## Fast Fix
 
 ```sh
-wget https://raw.githubusercontent.com/gabrielcapilla/resolve-lib-fix/main/resolve-fix && sh resolve-fix
+wget https://raw.githubusercontent.com/gabrielcapilla/resolve-lib-fix/main/fix && sh fix
 ```
 
 ## About the error
