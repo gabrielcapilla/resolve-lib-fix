@@ -19,7 +19,7 @@ The issue is, that resolve brings it’s own *glib2*, but not it’s own *pango*
 Access to the location
 
 ```sh
-cd /opt/resolve/lib
+cd /opt/resolve/libs
 ```
 
 Create the folder *_disabled* in `/opt/resolve/libs/` to move the *glib2* libraries there:
